@@ -1,0 +1,69 @@
+---
+title: "Introduction to GGPlot2"
+author: "Sina"
+date: "5/22/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Reading data and assign variables
+
+```{r}
+df <- read.csv('iris.csv')
+names(df)
+
+sepal_length <- df[['sepal_length']]
+sepal_width <- df[['sepal_width']]
+petal_length <- df[['petal_length']]
+petal_width <- df[['petal_width']]
+species <- df[['species']]
+```
+
+
+
+## Example of plots
+ggplot(data.frame, )
+
+```{r }
+# Example 01
+# Scatter Plot
+library(ggplot2)
+ggplot(iris, aes(x=sepal_length, y=sepal_width))+
+  geom_point(size=1.2, color='steelblue', shape=21)
+```
+
+
+```{r }
+#Example 02
+p <- ggplot(df, aes(x=sepal_length, y=sepal_width))+
+  # Control points color by groups
+  geom_point(aes(color=species, shape=species))+
+  # Use the scale_color_manual() function
+  scale_color_manual(values = c("#00AFBB", "#E7B800", "#FC4E07"))
+print(p)
+
+```
+
+## Legend Posision
+
+```{r}
+p + theme(legend.position='top')
+```
+
+
+## Titles and axis labels
+```{r}
+p + labs(
+  title = "Edgar Anderson's Iris Data",
+  subtitle = "iris is a data frame with 150 cases (rows) and 5 variables",
+  x = "Sepal Length (cm)", y = "Sepal Width (cm)"
+  )
+```
+
+
+
+
+
+
